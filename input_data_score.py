@@ -21,11 +21,11 @@ def l2f_write(l2f,total_l2f):
 		for key,value in l2f.items():
 			print(f'P({key}) = {value}/{total_l2f}',file = f)
 
-def l2w2f_write(l2w2f,total_l2w):
+def l2w2f_write(l2w2f,total_l2w2f):
 	with open('l2w2f_w.txt',mode = 'w')as f:
 		for label in l2w2f.keys():
 			for word,freq in l2w2f[label].items():
-				print(f'P({word}|{label}) = {freq}/{total_l2w[label]}',file = f)
+				print(f'P({word}|{label}) = {freq}/{total_l2w2f[label]}',file = f)
 	
 	
 
@@ -36,7 +36,7 @@ def main():
 	w2f = {}	
 	total_l2f = 0
 	l2w2f = {}
-	total_l2w = {}
+	total_l2w2f = {}
 	
 	#input_fileの読み込み
 	with open(input_file_name, 'r') as f:
@@ -48,10 +48,10 @@ def main():
 			l2w2f[label] = l2w2f.get(label,{})
 			for word in words:
 				l2w2f[label][word] = l2w2f[label].get(word,0)+1
-				total_l2w[label] =total_l2w.get(label,0)+1
+				total_l2w2f[label] =total_l2w2f.get(label,0)+1
 	##テキストファイルに結果の書き込み
 	l2f_write(l2f,total_l2f)
-	l2w2f_write(l2w2f,total_l2w)
+	l2w2f_write(l2w2f,total_l2w2f)
 	
 
 if __name__ == '__main__':
