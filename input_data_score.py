@@ -3,6 +3,7 @@ import MeCab
 
 mecab = MeCab.Tagger("-Owakati")
 
+##メールをラベルと単語に分割
 def reading_file(mail):
 	label,words = mail.split(',')
 	words = words.rstrip()
@@ -10,6 +11,7 @@ def reading_file(mail):
 			
 	return label,words
 
+##単語の頻度のカウント
 def w2f_count(words):
 	w2f = {}
 	for word in words:
