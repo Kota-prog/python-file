@@ -1,6 +1,6 @@
 import sys
 import MeCab
-
+from fractions import Fraction
 mecab = MeCab.Tagger("-Owakati")
 
 def reading_file(input_file_name):
@@ -17,7 +17,7 @@ def split_mail_into_words(mails):
 	for mail in mails:
 		label,words = mail.split(',')
 		words = words.rstrip()
-		words = mecab.parse(words).split(" ")
+		words = mecab.parse(words).split(' ')
 		mails_words.extend(words)		
 
 	return mails_words
@@ -38,27 +38,29 @@ def count_total_words(words_number):
 	return total_words_number
 
 def count_word2freq(words_number,total_words_number):
-	##確率の出力が問題
+	
 	w2f = {}
-	w2f = words_number
-	for key,value in w2f.items():
-		w2f[key] = (value)/(total_words_number)
+	for key,value in words_number.items():
+		w2f[key] = Fraction(value,total_words_number)
 
 	return w2f
+
+def output_w2f(w2f)
+	
+	for key,value in w2f.items():
+		print(f'{key} {value}')
 
 def main():
 	
 	input_file_name = sys.argv[1]
-	
+	##変数名
 	mails = reading_file(input_file_name)	
 	mails_words = split_mail_into_words(mails)
 	words_number = count_words(mails_words)
 	total_words_number = count_total_words(words_number)
-	print(total_words_number)
-	print(words_number)
-	##この下の関数の後　変数のバグ
 	w2f = count_word2freq(words_number,total_words_number)
-	
+	##ファイル出力
+	output_w2f(w2f)
 
 if __name__ == '__main__':
 	main()
