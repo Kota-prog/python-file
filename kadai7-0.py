@@ -1,6 +1,7 @@
 import sys
 import MeCab
 from fractions import Fraction
+
 mecab = MeCab.Tagger("-Owakati")
 
 def reading_file(input_file_name):
