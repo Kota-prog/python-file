@@ -14,12 +14,12 @@ def reading_file(input_file_name):
 	return mails
 
 def split_mails_into_words(mails):
-	##\nを消す
+
 	mails_words = []
 	for mail in mails:
-		label,words = mail.split(',')
-		words = words.rstrip()
-		words = mecab.parse(words).split(' ')
+		label,sentence = mail.split(',')
+		sentence = sentence.rstrip()
+		words = mecab.parse(sentence).split(' ')
 		mails_words.extend(words)		
 
 	return mails_words
@@ -61,7 +61,7 @@ def main():
 	w2f = count_words(mails_words)
 	total_w2f = count_total_words(w2f)
 	pw = count_word2freq(w2f,total_w2f)
-	##ファイル出力
+	
 	output_pw(pw)
 
 if __name__ == '__main__':
